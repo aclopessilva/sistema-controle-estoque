@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
-
 class UserController extends Controller
 {
     /**
@@ -13,7 +13,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $view = view('user.index')->with('usuarios', \App\User::all());
+        $view = view('user.index')->with('usuarios', User::all());
         return $view;
     }
 
@@ -39,7 +39,15 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = new User;
+        $user->name        = $request->name;
+        $user->email = $request->email;
+        $user->password    = $request->password;
+        $user->isAdmin       = $request->isAdmin;
+        $user->isActive       = $request->isActive;
+        $user->save();
+        return redirect()->route('user.index')->with('message', 'Usuario criado com sucesso!');
+        
     }
 
     /**
@@ -50,7 +58,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::find($id);        
+        return view('user.show')->with('user', $user);
     }
 
     /**
@@ -61,7 +70,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        
+        $user = User::find($id);        
+        return view('user.edit')->with('user', $user);
     }
 
     /**
@@ -73,7 +84,14 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+        $user->name        = $request->name;
+        $user->email = $request->email;
+        $user->password    = $request->password;
+        $user->isAdmin       = $request->isAdmin;
+        $user->isActive       = $request->isActive;
+        $user->save();
+        return redirect()->route('user.index')->with('message', 'Usuario salvo com sucesso!');
     }
 
     /**
@@ -84,6 +102,11 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+       // delete
+        $nerd = User::find($id);
+        $nerd->delete();
+
+        // redirect
+        return redirect()->route('user.index')->with('message',  'Usuario deletado com sucesso!');
     }
 }
