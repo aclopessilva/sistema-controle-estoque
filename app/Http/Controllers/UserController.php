@@ -4,6 +4,16 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+
+/**
+ * Inspirado neste tutorial
+ * 
+ * https://scotch.io/tutorials/simple-laravel-crud-with-resource-controllers
+ * e
+ * um pouco desse
+ * https://medium.com/trainingcenter/php-criando-um-crud-b%C3%A1sico-com-laravel-5-4-f17afe11c66e
+ * 
+ */
 class UserController extends Controller
 {
     /**
@@ -103,8 +113,8 @@ class UserController extends Controller
     public function destroy($id)
     {
        // delete
-        $nerd = User::find($id);
-        $nerd->delete();
+        $user = User::find($id);
+        $user->delete();
 
         // redirect
         return redirect()->route('user.index')->with('message',  'Usuario deletado com sucesso!');
