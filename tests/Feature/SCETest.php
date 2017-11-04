@@ -20,6 +20,15 @@ class SCETest extends TestCase
                      'name' => $user->name
                  ]
                  );
+         
+//          $this->browse(function ($browser) use ($user) {
+//            $browser->visit('/login')
+//                    ->type('email', $user->email)
+//                    ->type('password', 'secret')
+//                    ->press('Login')
+//                    ->assertPathIs('/home');
+//        });
+        
          /*
          $this->visit('/login')
             ->type($user->email, 'email')
