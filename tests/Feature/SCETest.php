@@ -20,5 +20,11 @@ class SCETest extends TestCase
                      'name' => $user->name
                  ]
                  );
+         /*
+         $this->visit('/login')
+            ->type($user->email, 'email')
+            ->type($user->password, 'password')
+            ->press('Login')
+            ->seePageIs('/home');*/
     }
 }
