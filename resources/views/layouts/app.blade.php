@@ -70,6 +70,24 @@
                 </div>
             </div>
         </nav>
+        
+        @guest
+        @else        
+        <div class="container">
+            <nav class="navbar navbar-inverse">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="{{ URL::to('home') }}">Inicio</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ URL::to('user') }}">Usuarios</a></li>
+                    <li><a href="{{ URL::to('fornecedor') }}">Fornecedores</a></li>
+                    <li><a href="{{ URL::to('produto') }}">Produtos</a></li>
+                    <li><a href="{{ URL::to('produto/comestoque') }}">Produtos com estoque</a></li>
+                    <li><a href="{{ URL::to('produto/semestoque') }}">Produtos sem estoque</a></li>
+                </ul>
+            </nav>
+        </div>
+        @endguest
 
         @yield('content')
     </div>

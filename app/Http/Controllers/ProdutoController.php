@@ -116,4 +116,20 @@ class ProdutoController extends Controller
         // redirect
         return redirect()->route('produto.index')->with('message',  'Produto deletado com sucesso!');
     }
+    
+    
+    
+    
+    public function comestoque()
+    {
+        $view = view('produto.comestoque')->with('produtos', Produto::where('quantidade', '>', 0)->get());
+        return $view;
+    }
+    
+    public function semestoque()
+    {
+        $view = view('produto.semestoque')->with('produtos', Produto::where('quantidade', '=', 0)->get());
+        return $view;
+    }
+    
 }

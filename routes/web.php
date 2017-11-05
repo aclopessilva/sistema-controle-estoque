@@ -23,4 +23,8 @@ Route::resource('user', 'UserController');
 
 Route::resource('fornecedor', 'FornecedorController');
 
+Route::get('/produto/comestoque', 'ProdutoController@comestoque')->name('produto.comestoque');
+
+Route::get('/produto/semestoque', 'ProdutoController@semestoque')->name('produto.semestoque');
+
 Route::resource('produto', 'ProdutoController');
