@@ -14,7 +14,11 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    @if ($show_admin_dashboard == true)
+                        Valor total de items com estoque:  {{$custo_total}}
+                    @else
+                        Você nao tem dashboard
+                    @endif
                 </div>
             </div>
         </div>
