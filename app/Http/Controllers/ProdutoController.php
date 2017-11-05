@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Produto;
+use App\Fornecedor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ProdutoController extends Controller
 {
@@ -19,7 +21,15 @@ class ProdutoController extends Controller
      */
     public function index()
     {
-        $view = view('produto.index')->with('produtos', Produto::all());
+        
+        $produtos = Produto::all();
+        $fornecedores = Fornecedor::all()->pluck('nome', 'id');
+        $fornecedores->prepend("Todos", "-");
+        Log::info('fornecedores'.$fornecedores);
+        
+        $view = view('produto.index')
+                ->with('produtos', $produtos)
+                ->with('fornecedores', $fornecedores);
         return $view;
     }
 
@@ -32,7 +42,7 @@ class ProdutoController extends Controller
     {
         //
         // load the create form (app/views/nerds/create.blade.php)
-        $fornecedores = \App\Fornecedor::all()->pluck('nome', 'id');
+        $fornecedores = Fornecedor::all()->pluck('nome', 'id');
         $view = view('produto.create')->with('fornecedores', $fornecedores);
         return $view;
     }
@@ -78,7 +88,7 @@ class ProdutoController extends Controller
     {
         
         $produto = Produto::find($id);
-        $fornecedores = \App\Fornecedor::all()->pluck('nome', 'id');
+        $fornecedores = Fornecedor::all()->pluck('nome', 'id');        
         return view('produto.edit')->with('produto', $produto)->with('fornecedores', $fornecedores);
     }
 
@@ -129,6 +139,25 @@ class ProdutoController extends Controller
     public function semestoque()
     {
         $view = view('produto.semestoque')->with('produtos', Produto::where('quantidade', '=', 0)->get());
+        return $view;
+    }
+    
+    public function buscafornecedor(Request $request)
+    {
+        
+        if($request->fornecedor_id === '-'){
+            $produtos = Produto::all();
+        }else{
+            $produtos = Produto::where('fornecedor_id', $request->fornecedor_id)->get();    
+        }
+        
+        $fornecedores = Fornecedor::all()->pluck('nome', 'id');        
+        $fornecedores->prepend("Todos", "-");
+        
+        $view = view('produto.index')
+                ->with('produtos', $produtos)
+                ->with('fornecedores', $fornecedores);
+        
         return $view;
     }
     

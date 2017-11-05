@@ -9,6 +9,20 @@
 
                 <div class="panel-body">
                     <a class="btn btn-small btn-success" href="{{ URL::to('produto/create') }}">Criar Produto</a>
+                    
+                    
+                    {{ Form::open(array('url' => 'produto/buscafornecedor')) }}
+                    
+                        <div class="form-group">
+                            {{ Form::label('fornecedor_id', 'Fornecedor') }}
+                            {!! Form::select('fornecedor_id', $fornecedores, Input::old('fornecedor_id'), ['class'=> 'form-control'])  !!}
+                        </div>
+
+                    
+                        {{ Form::submit('Buscar!', array('class' => 'btn btn-primary')) }}
+
+                    {{ Form::close() }}
+                    
                     <br> <br>
                     
                     <!-- will be used to show any messages -->
