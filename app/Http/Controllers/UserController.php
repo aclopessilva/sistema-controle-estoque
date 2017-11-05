@@ -28,6 +28,11 @@ class UserController extends Controller
      */
     public function index()
     {
+        //bloqueando acesso para usuarios diferentes de admin
+        if(Auth::user()->isAdmin  != true){
+            return response('Nao permitido.', 403);
+        }
+
         $view = view('user.index')->with('usuarios', User::all());
         return $view;
     }
@@ -39,8 +44,10 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
-        // load the create form (app/views/nerds/create.blade.php)
+        //bloqueando acesso para usuarios diferentes de admin
+        if(Auth::user()->isAdmin  != true){
+            return response('Nao permitido.', 403);
+        }
         
         $view = view('user.create');
         return $view;
@@ -54,6 +61,12 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+
+        //bloqueando acesso para usuarios diferentes de admin
+        if(Auth::user()->isAdmin  != true){
+            return response('Nao permitido.', 403);
+        }
+
         $user = new User;
         $user->name        = $request->name;
         $user->email = $request->email;
@@ -73,6 +86,13 @@ class UserController extends Controller
      */
     public function show($id)
     {
+
+        //bloqueando acesso para usuarios diferentes de admin
+        if(Auth::user()->isAdmin  != true){
+            return response('Nao permitido.', 403);
+        }
+
+
         $user = User::find($id);        
         return view('user.show')->with('user', $user);
     }
@@ -85,6 +105,11 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+
+        //bloqueando acesso para usuarios diferentes de admin
+        if(Auth::user()->isAdmin  != true){
+            return response('Nao permitido.', 403);
+        }
         
         $user = User::find($id);        
         return view('user.edit')->with('user', $user);
@@ -99,6 +124,12 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        //bloqueando acesso para usuarios diferentes de admin
+        if(Auth::user()->isAdmin  != true){
+            return response('Nao permitido.', 403);
+        }
+
         $user = User::find($id);
         $user->name        = $request->name;
         $user->email = $request->email;
@@ -117,6 +148,12 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
+        //bloqueando acesso para usuarios diferentes de admin
+        if(Auth::user()->isAdmin  != true){
+            return response('Nao permitido.', 403);
+        }
+
+
        // delete
         $user = User::find($id);
         $user->delete();

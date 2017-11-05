@@ -79,7 +79,9 @@
                     <a class="navbar-brand" href="{{ URL::to('home') }}">Inicio</a>
                 </div>
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ URL::to('user') }}">Usuarios</a></li>
+                    @if ( Auth::user()->isAdmin  == true)
+                        <li><a href="{{ URL::to('user') }}">Usuarios</a></li>
+                    @endif
                     <li><a href="{{ URL::to('fornecedor') }}">Fornecedores</a></li>
                     <li><a href="{{ URL::to('produto') }}">Produtos</a></li>
                     <li><a href="{{ URL::to('produto/comestoque') }}">Produtos com estoque</a></li>
