@@ -22,3 +22,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('user', 'UserController');
 
 Route::resource('fornecedor', 'FornecedorController');
+
+Route::resource('produto', 'ProdutoController');
