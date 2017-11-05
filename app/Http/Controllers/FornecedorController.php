@@ -122,7 +122,7 @@ class FornecedorController extends Controller
         $possui_produtos_estoque = false;
         foreach($fornecedor->produtos as $produto){
             if($produto->quantidade > 0){
-                $possui_produtos_estoque´ = true;
+                $possui_produtos_estoque = true;
             }
         }
         
