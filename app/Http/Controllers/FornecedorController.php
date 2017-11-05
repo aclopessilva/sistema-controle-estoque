@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Fornecedor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Inspirado neste tutorial
@@ -16,6 +17,12 @@ use Illuminate\Http\Request;
  */
 class FornecedorController extends Controller
 {
+    
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -34,9 +41,6 @@ class FornecedorController extends Controller
      */
     public function create()
     {
-        //
-        // load the create form (app/views/nerds/create.blade.php)
-        
         $view = view('fornecedor.create');
         return $view;
     }
@@ -49,6 +53,10 @@ class FornecedorController extends Controller
      */
     public function store(Request $request)
     {
+        
+        //https://laravel.com/docs/5.5/authentication        
+        $user = Auth::user();
+        
         $fornecedor = new Fornecedor;
         $fornecedor->nome        = $request->nome;
         $fornecedor->endereco = $request->endereco;
@@ -110,9 +118,20 @@ class FornecedorController extends Controller
     {
        // delete
         $fornecedor = Fornecedor::find($id);
-        $fornecedor->delete();
-
-        // redirect
-        return redirect()->route('fornecedor.index')->with('message',  'Fornecedor deletado com sucesso!');
+        
+        $possui_produtos_estoque = false;
+        foreach($fornecedor->produtos as $produto){
+            if($produto->quantidade > 0){
+                $possui_produtos_estoque´ = true;
+            }
+        }
+        
+        if($possui_produtos_estoque){
+            return redirect()->route('fornecedor.index')->with('error', 'O fornecedor possui produtos em estoque, NÃO pode ser eliminado!');
+        }else{
+            $fornecedor->delete();
+            // redirect
+            return redirect()->route('fornecedor.index')->with('message',  'Fornecedor deletado com sucesso!');
+        }
     }
 }
