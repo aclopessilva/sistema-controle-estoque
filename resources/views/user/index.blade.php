@@ -39,10 +39,16 @@
                                 <!-- we will also add show, edit, and delete buttons -->
                                 <td>
 
-                                    <!-- delete the nerd (uses the destroy method DESTROY /nerds/{id} -->
+                                    <!-- metodo para deletar usuario  usando metodo HTTP DELETE que esta apontando para  metodo DESTROY do controller /user/{id} -->
                                     {{ Form::open(array('url' => 'user/' . $value->id, 'class' => 'pull-right')) }}
                                         {{ Form::hidden('_method', 'DELETE') }}
                                         {{ Form::submit('Delete', array('class' => 'btn btn-warning')) }}
+                                    {{ Form::close() }}
+
+                                    <!-- metodo para bloquead /user/block/{id} -->
+                                    {{ Form::open(array('url' => 'user/block/' . $value->id, 'class' => 'pull-right')) }}
+                                        {{ Form::hidden('_method', 'GET') }}
+                                        {{ Form::submit('Bloquear', array('class' => 'btn btn-info')) }}
                                     {{ Form::close() }}
                                     
                                     <!-- show the nerd (uses the show method found at GET /nerds/{id} -->

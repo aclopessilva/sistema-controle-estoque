@@ -162,4 +162,19 @@ class UserController extends Controller
         // redirect
         return redirect()->route('user.index')->with('message',  'Usuario deletado com sucesso!');
     }
+
+    public function block($id)
+    {
+        //bloqueando acesso para usuarios diferentes de admin
+        if(Auth::user()->isAdmin  != true){
+            return response('Nao permitido.', 403);
+        }
+        // delete
+        $user = User::find($id);
+        $user->isActive = false;
+        $user->save();
+        // redirect
+        return redirect()->route('user.index')->with('message',  'Usuario bloqueado com sucesso!');
+    }
+
 }

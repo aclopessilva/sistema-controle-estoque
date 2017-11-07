@@ -17,8 +17,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');  
+Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('user/block/{user}', 'UserController@block')->name('user.block');
 Route::resource('user', 'UserController');
 
 Route::resource('fornecedor', 'FornecedorController');
