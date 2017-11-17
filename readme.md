@@ -1,44 +1,43 @@
 
-##instalar
+# instalar
 
-#baixar as fontes e rodar
-composer install
+- baixar as fontes e rodar
+- composer install
 
+# Criar BD
+Criar BD com nome sistema-controle-estoque
 
-# criar arquivo .env com a configuracao de base de dados
-# pode ser baseado do .env.example
+# Criar arquivo .env
+pode ser baseado do ".env.example" e modificar a a configuracao de base de dados para o mysql local, 
 
-
-#criar chave para laravel
+# Criar chave para laravel
 php artisan key:generate
 
-#criar as tabelas
+# Criar as tabelas
 php artisan migrate
 
+# Ver os routes cadastrados
+Para ver os routes com os verbos HTTP apontando a diferentes metodos dos controlers
 
-#ver os routes definidos
 php artisan route:list
 
 
 ## TESTES
-# os testes estaso na pasta  test
+os testes estao na pasta  test
 
-#rodar testes
-vendor/phpunit/phpunit/phpunit
+# rodar testes
+vendor/phpunit/phpunit/phpunit ou
+vendor/bin/phpunit
 
-
-
-##UTILS
-# exemplo de criacao
+# LINKS
+## exemplo para a criacao do trabalho
 https://scotch.io/tutorials/simple-laravel-crud-with-resource-controllers
 
+# adicionar suporte de helpers Html para o Laravel
 
+https://laravelcollective.com/docs/master/html
 
-
-# adicionar suporte html
-# https://laravelcollective.com/docs/master/html
 composer require "laravelcollective/html":"^5.4.0"
-	
 
 # criar controller com estrutura CRUD
 php artisan make:controller UserController --resource
