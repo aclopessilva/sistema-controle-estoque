@@ -1,7 +1,7 @@
 
-# instalar
-
-- baixar as fontes e rodar
+# Instalar
+-  git clone https://github.com/aclopessilva/sistema-controle-estoque.git
+- entrar na pasta "sistema-controle-estoque"
 - composer install
 
 # Criar BD
@@ -22,27 +22,27 @@ Para ver os routes com os verbos HTTP apontando a diferentes metodos dos control
 php artisan route:list
 
 
-## TESTES
+## testes
 os testes estao na pasta  test
 
-# rodar testes
+### Rodar testes
 vendor/phpunit/phpunit/phpunit ou
 vendor/bin/phpunit
 
-# LINKS
-## exemplo para a criacao do trabalho
+## links de ajuda
+### exemplo para a criacao do trabalho
 https://scotch.io/tutorials/simple-laravel-crud-with-resource-controllers
 
-# adicionar suporte de helpers Html para o Laravel
+### adicionar suporte de helpers Html para o Laravel
 
 https://laravelcollective.com/docs/master/html
 
 composer require "laravelcollective/html":"^5.4.0"
 
-# criar controller com estrutura CRUD
+### criar controller com estrutura CRUD
 php artisan make:controller UserController --resource
 
-# especificar uns routes automaticos para controllers de tipo resource
+### especificar uns routes automaticos para controllers de tipo resource
 Route::resource('photos', 'PhotoController');
 
 
